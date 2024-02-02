@@ -1,7 +1,7 @@
 class StudentRegistraction{
     constructor(ID,name,age,qualification,userName,password){
-      this.userID=ID;
-      this.user_Name=name;
+      this.ID=ID;
+      this.Name=name;
       this.userAge=age;
       this.userQualification=qualification;
       this.userName=userName;
@@ -10,13 +10,13 @@ class StudentRegistraction{
       
     }  
     signup(){
-      this.loginArr.push(this.user_Name);
+      this.loginArr.push(this.Name);
       this.loginArr.push(this.userPassword);
       this.loginArr.push(this.userName);
    }
    login(){
-     if(this.loginArr.includes(this.user_Name) && this.loginArr.includes(this.userPassword)){
-      console.log(`welcome back ${this.user_Name}`)
+     if(this.loginArr.includes(this.Name) && this.loginArr.includes(this.userPassword)){
+      console.log(`welcome back ${this.Name}`)
       }else{console.log("This account isn't registered")}
     }
     deleteStudent(user1){
@@ -32,9 +32,9 @@ class Course {
   constructor(courseName,courseID){
     this.courseName=courseName;
     this.courseID=courseID;
+    this.courseList=[]
    }
  addcourse(course){
-    this.courseList=[]
     this.courseList.push(course)
     console.log(this.courseList)
    }
