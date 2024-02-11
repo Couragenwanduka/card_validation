@@ -1,84 +1,65 @@
-// Define the base class 'Animal'
-class Animal {
-  constructor(name, species, habitat) {
-      this.name = name;
-      this.species = species;
-      this.habitat = habitat;
+ // function Luhncheck() checks if the number is a truly a credit card
+ 
+   function luhnCheck(cardNumber) {
+    let checksum = 0; // running checksum total
+    let j = 1; // takes value of 1 or 2
+  
+    // Process each digit one by one starting from the last
+    for (let i = cardNumber.length - 1; i >= 0; i--) {
+      let calc = 0;
+      // Extract the next digit and multiply by 1 or 2 on alternative digits.
+      calc = Number(cardNumber.charAt(i)) * j;
+  
+      // If the result is in two digits add 1 to the checksum total
+      if (calc > 9) {
+        checksum = checksum + 1;
+        calc = calc - 10;
+      }
+  
+      // Add the units element to the checksum total
+      checksum = checksum + calc;
+  
+      // Switch the value of j
+      if (j == 1) {
+        j = 2;
+      } else {
+        j = 1;
+      }
+    }
+    //Check if it is divisible by 10 or not.
+    return (checksum % 10) == 0;
+    
   }
+  function cardValidation(cardNumber){
+    // Define regex patterns for each card type
+  
+   // MasterCard numbers start with 5 or 2and are 16 digits long.
+  const masterCardPattern=/^5[1-5][0-9]{14}$|^2(?:2(?:2[1-9]|[3-9][0-9])|[3-6][0-9][0-9]|7(?:[01][0-9]|20))[0-9]{12}$/;
+  // VisaCard numbers start with 4 and are 16 digits long
+  const visaCardPattern=/^3[47][0-9]{13}$/;
+  // American Express numbers start with 3 and are 15 digits long
+  const americanExpressPattern=/^3\d{14}/;
+  // Discover number can start with 65 or 6011 and 16 digits long
+  const Discover= /^6011\d{12}|^65\d{14}/
+  // verve number can start with 5060 or 5061 and are 16 digits long
+  const verve= /^506(0|1)\d{12}$/
+   
+  // Check if the card number matches any of the patterns
+  if( luhnCheck(cardNumber)=== true){
+  if(masterCardPattern.test(cardNumber)){
+    return "Master Card";
+  }else if(visaCardPattern.test(cardNumber)){
+    return "visa Card"
+  }else if (americanExpressPattern.test(cardNumber)){
+    return "American Express"
+  }
+} else{
+    return "Invaild Card"
 
-  makeSound() {
-      // Placeholder for making a sound
-  }
-
-  move() {
-      // Placeholder for the movement method
-  }
 }
-
-// Inheritance: Creating subclasses for specific types of animals
-
-class Mammal extends Animal {
-  constructor(name, species, habitat, furColor) {
-      super(name, species, habitat);
-      this.furColor = furColor;
-  }
-
-  giveBirth() {
-      // Placeholder for giving birth method
-  }
-}
-
-class Bird extends Animal {
-  constructor(name, species, habitat, wingspan) {
-      super(name, species, habitat);
-      this.wingspan = wingspan;
-  }
-
-  fly() {
-      // Placeholder for flying method
-  }
-}
-
-class Fish extends Animal {
-  constructor(name, species, habitat, scaleType) {
-      super(name, species, habitat);
-      this.scaleType = scaleType;
-  }
-
-  swim() {
-      // Placeholder for swimming method
-  }
-}
-
-// Abstraction: Hiding the implementation details
-
-class Reptile extends Animal {
-  constructor(name, species, habitat, scaleType) {
-      super(name, species, habitat);
-      this.scaleType = scaleType;
-  }
-
-  move() {
-      console.log(`${this.name} slithers or crawls`); // Specific implementation for reptiles
-  }
-}
-
-// Polymorphism: Using a common interface for different types of animals
-
-function performActivity(animal) {
-  animal.move();
-  animal.makeSound();
-}
-
-// Example Usage:
-
-const lion = new Mammal("Simba", "Lion", "Grassland", "Golden");
-const parrot = new Bird("Polly", "Parrot", "Rainforest", 30);
-const shark = new Fish("Jaws", "Great White Shark", "Ocean", "Cartilaginous");
-
-performActivity(lion);
-performActivity(parrot);
-performActivity(shark);
-
-const snake = new Reptile("Slippy", "Python", "Forest", "Smooth");
-performActivity(snake);
+   }
+  const cardNumber="5399412261574698";
+ // const luhnCheck1 = luhnCheck("5399412261574698")
+   const cardtype= cardValidation(cardNumber);
+   console.log('The card type is', cardtype);
+   //console.log(luhnCheck1)

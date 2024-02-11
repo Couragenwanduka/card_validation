@@ -19,13 +19,7 @@ class StudentRegistraction{
       console.log(`welcome back ${this.Name}`)
       }else{console.log("This account isn't registered")}
     }
-    deleteStudent(user1){
-        this.loginArr.find((user)=>{
-        if(user.user_Name ===user1){
-          console.log("yudrtc")
-        }else{console.log("sdhchgwgy")}
-      }) 
-    }
+  
 }
 
 class Course {
